@@ -27,7 +27,12 @@ export default {
                     res.UserName.match(new RegExp(this.search, 'i'));
                     return data;
 
-                }).slice(start, end);
+                });
+                if(result.length > this.size) {
+                    result = result.slice(start, end);
+                } else {
+                    this.currentPage = 0;
+                }
                 return result;
           },
      },
@@ -50,7 +55,7 @@ export default {
             { opacity: 1, height: '1.6em' },
             { complete: done }
             )
-        }, delay)
+        }, 200)
         },
         leave(el, done) {
         var delay = el.dataset.index * 150
@@ -60,7 +65,7 @@ export default {
             { opacity: 0, height: 0 },
             { complete: done }
             )
-        }, delay)
+        }, 200)
         }
 
      }
